@@ -26,7 +26,25 @@ namespace lab01
             BDay = BDay.AddYears(year - 1);
             BDay = BDay.AddMonths(month - 1);
             BDay = BDay.AddDays(day - 1);
-           
+            if (year % 4 == 0) {
+                if (year % 100 == 0){
+                    if (year % 400 == 0) {
+                        Console.WriteLine(year + " - високосный год");
+                    }
+                    else
+                    {
+                        Console.WriteLine(year + " - не високосный год");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(year + " - високосный год");
+                }
+            }
+            else
+            {
+                Console.WriteLine(year + " - не високосный год");
+            }
         }
 
     }
