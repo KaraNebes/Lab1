@@ -6,21 +6,23 @@ namespace lab01
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Как Вас зовут?");
-            YourName();
-            Console.WriteLine("Назовите Ваши день, месяц и год рождения через Enter");
-            YourAge();
+            string Name = YourName();
+            int Age = YourAge();
+            Console.WriteLine("Привет, " + Name + ". Ваш возраст " + Age + " лет. Приятно познакомиться.");
             Console.ReadKey();
         }
-        public static void YourName() {
-            string str = Console.ReadLine();
+        public static string YourName() {
+            Console.WriteLine("Как Вас зовут?");
+            string name = Console.ReadLine();
+            return (name);
         }
-        public static void YourAge()
+        public static int YourAge()
         {
+            Console.WriteLine("Назовите Ваши день, месяц и год рождения через Enter");
             int day, month, year, y=0;
             day = Convert.ToInt32(Console.ReadLine());
             month = Convert.ToInt32(Console.ReadLine());
-            if ((month > 12)||(month<1))
+            if (month>12)
             {
                 Console.WriteLine("Такого месяца не существует.");
                 Console.ReadKey();
@@ -33,7 +35,7 @@ namespace lab01
                 Console.ReadKey();
                 Environment.Exit(0);
             }
-            leap_year(year, y);
+            y = leap_year(year);
             day_check(day, year, y);
             DateTime BDay;
             BDay = new DateTime();
@@ -43,15 +45,18 @@ namespace lab01
        
 
             int age = Convert.ToInt32(DateTime.Now.Year - BDay.Year);
-            if ((DateTime.Now.Month > BDay.Month) && (DateTime.Now.Month == BDay.Month))
+            if ((DateTime.Now.Month < BDay.Month)||(DateTime.Now.Month == BDay.Month))
             {
-                
+                if (DateTime.Now.Day < BDay.Day)
+                {
+                    age--;
+                }
             }
-            Console.WriteLine(age);
-            Console.ReadKey();
+            return (age);
         }
-        public static int leap_year (int year, int y)
+        public static int leap_year (int year)
         {
+            int y = 0;
             if (year % 4 == 0)
             {
                 if (year % 100 == 0)
@@ -82,67 +87,40 @@ namespace lab01
         }
         public static void day_check (int day, int month, int y)
         {
-            for (int i = 1; i <= month; i++)
+            if((month==1)||(month==3) || (month == 5) || (month == 7) || (month == 8) || (month == 10) || (month == 12))
             {
-                if (i < 8)
+                if (day >= 31)
                 {
-                    if (i % 2 == 1) //Проверка на январь, март, май и июль
-                    {
-                        if (day > 31)
-                        {
-                            Console.WriteLine("Такого дня не существует.");
-                            Console.ReadKey();
-                            Environment.Exit(0);
-                        }
-                    }
-                    else if((i % 2 == 0) && (i != 2)) //проверка на апрелб и июнь
-                    {
-                        if (day > 30)
-                        {
-                            Console.WriteLine("Такого дня не существует.");
-                            Console.ReadKey();
-                            Environment.Exit(0);
-                        }
-                    }
-                    else if((i==2)&&(y==1)) //проверка на февраль високосного года
-                    {
-                        if (day > 29)
-                        {
-                            Console.WriteLine("Такого дня не существует.");
-                            Console.ReadKey();
-                            Environment.Exit(0);
-                        }
-                    }
-                    else if(i==2)
-                    {
-                        if (day > 28) //проверка на февраль не високосного года
-                        {
-                            Console.WriteLine("Такого дня не существует.");
-                            Console.ReadKey();
-                            Environment.Exit(0);
-                        }
-                    }
+                    Console.WriteLine("Такого дня не существует.");
+                    Console.ReadKey();
+                    Environment.Exit(0);
                 }
-                else if (i >= 8)
+            }
+            else if((month == 4) || (month == 6) || (month == 9) || (month == 11))
+            {
+                if (day > 30)
                 {
-                    if (i % 2 == 1) //Проверка на сентябрь и ноябрь
-                    {
-                        if (day > 30)
-                        {
-                            Console.WriteLine("Такого дня не существует.");
-                            Console.ReadKey();
-                            Environment.Exit(0);
-                        }
-                    }
-                    else if (i % 2 == 0) //проверка на август, октябрь и декабрь
-                    {
-                        if (day > 31)
-                        {
-                            Console.WriteLine("Такого дня не существует.");
-                            Console.ReadKey();
-                            Environment.Exit(0);
-                        }
-                    }
+                    Console.WriteLine("Такого дня не существует.");
+                    Console.ReadKey();
+                    Environment.Exit(0);
+                }
+            }
+            else if((month == 2) && (y == 1))
+            {
+                if (day > 29)
+                {
+                    Console.WriteLine("Такого дня не существует.");
+                    Console.ReadKey();
+                    Environment.Exit(0);
+                }
+            }
+            else if ((month == 2) && (y == 0))
+            {
+                if (day > 28)
+                {
+                    Console.WriteLine("Такого дня не существует.");
+                    Console.ReadKey();
+                    Environment.Exit(0);
                 }
             }
         }
