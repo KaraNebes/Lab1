@@ -26,7 +26,7 @@ namespace lab01
             BDay = BDay.AddYears(year - 1);
             BDay = BDay.AddMonths(month - 1);
             BDay = BDay.AddDays(day - 1);
-            Console.WriteLine(BDay);
+           
         }
 
     }
