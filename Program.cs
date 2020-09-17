@@ -31,23 +31,19 @@ namespace lab01
             year = Convert.ToInt32(Console.ReadLine());
             if (year < 1)
             {
-                Console.WriteLine("Такого года не существует. Вы что родились до нашей эры?");
+                Console.WriteLine("Такого года не существует. Вы что не из нашей эры?");
                 Console.ReadKey();
                 Environment.Exit(0);
             }
             y = leap_year(year);
             day_check(day, year, y);
-            DateTime BDay;
-            BDay = new DateTime();
-            BDay = BDay.AddYears(year - 1);
-            BDay = BDay.AddMonths(month - 1);
-            BDay = BDay.AddDays(day - 1);
+            
        
 
-            int age = Convert.ToInt32(DateTime.Now.Year - BDay.Year);
-            if ((DateTime.Now.Month < BDay.Month)||(DateTime.Now.Month == BDay.Month))
+            int age = DateTime.Now.Year - year;
+            if ((DateTime.Now.Month < month)||(DateTime.Now.Month == month))
             {
-                if (DateTime.Now.Day < BDay.Day)
+                if (DateTime.Now.Day < day)
                 {
                     age--;
                 }
